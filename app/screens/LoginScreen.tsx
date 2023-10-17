@@ -5,6 +5,7 @@ import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
 import { colors, spacing } from "../theme"
+import axios from "axios"
 
 interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
@@ -19,11 +20,13 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError },
   } = useStores()
 
+  
+
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
     setAuthEmail("leewoorim@naver.com")
-    setAuthPassword("leewoorim123")
+    setAuthPassword("leewoorim")
 
     // Return a "cleanup" function that React will run when the component unmounts
     return () => {
@@ -35,19 +38,33 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const error = isSubmitted ? validationError : ""
 
   function login() {
-    setIsSubmitted(true)
-    setAttemptsCount(attemptsCount + 1)
+    let auth_token = " ";
+
+    axios.post('http://127.0.0.1:8000/auth/token', {
+      email: authEmail,
+      password: authPassword
+    })
+    .then(function (response) {
+      console.log(response.data);
+      //console.log(response.data["access_token"]); // get access token 
+      auth_token = response.data["access_token"];
+      setIsSubmitted(true)
+      setAttemptsCount(attemptsCount + 1)
+      setAuthToken(auth_token);
+    })
+    .catch(function (error) {
+      console.log(error);
+      return;
+    });
 
     if (validationError) return
 
     // Make a request to your server to get an authentication token.
     // If successful, reset the fields and set the token.
-    setIsSubmitted(false)
+    setIsSubmitted(true)
     setAuthPassword("")
     setAuthEmail("")
-
     // We'll mock this with a fake token.
-    setAuthToken(String(Date.now()))
   }
 
   const PasswordRightAccessory = useMemo(
