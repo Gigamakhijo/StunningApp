@@ -11,7 +11,7 @@ interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
   const authPasswordInput = useRef<TextInput>()
-
+  const { navigation } = _props
   const [authPassword, setAuthPassword] = useState("")
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -82,7 +82,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       },
     [isAuthPasswordHidden],
   )
-
+  function goSignup() {
+    navigation.navigate("Signup");
+  }
   return (
     <Screen
       preset="auto"
@@ -127,6 +129,14 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         style={$tapButton}
         preset="reversed"
         onPress={login}
+      />
+
+      <Button
+        testID="SignUp-button"
+        text="Signup"
+        style={$tapButton}
+        preset="reversed"
+        onPress={goSignup}
       />
     </Screen>
   )

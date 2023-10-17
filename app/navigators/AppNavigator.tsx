@@ -34,8 +34,8 @@ import { colors } from "app/theme"
  *   https://reactnavigation.org/docs/typescript#type-checking-the-navigator
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
-export type AppStackParamList = {
-  Test: undefined
+export type AppStackParamList = {s
+  Signup: undefined
   Welcome: undefined
   Login: undefined // @demo remove-current-line
   Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
@@ -76,7 +76,6 @@ const AppStack = observer(function AppStack() {
           <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} /> 
           {/* @demo remove-block-start */}
           <Stack.Screen name="Demo" component={DemoNavigator} />
-          <Stack.Screen name="Test" component={Screens.TestScreen} />
         </>
       ) : (
         <>
@@ -85,7 +84,7 @@ const AppStack = observer(function AppStack() {
       )}
       {/* @demo remove-block-end */}
       {/** 🔥 Your screens go here */}
-      
+      <Stack.Screen name="Signup" component={Screens.SignupScreen} />
       {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
     </Stack.Navigator>
   )

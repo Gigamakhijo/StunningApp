@@ -23,7 +23,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   } = useStores()
 
   function goNext() {
-    navigation.navigate("Test")
+    //navigation.navigate("")        수정 필 
   }
 
   useHeader(
