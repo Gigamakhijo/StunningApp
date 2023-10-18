@@ -38,7 +38,8 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const error = isSubmitted ? validationError : ""
 
   function login() {
-    let auth_token = " ";
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    let authToken = " ";
 
     axios.post('http://127.0.0.1:8000/auth/token', {
       email: authEmail,
@@ -46,15 +47,14 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     })
     .then(function (response) {
       console.log(response.data);
-      //console.log(response.data["access_token"]); // get access token 
-      auth_token = response.data["access_token"];
+      // console.log(response.data["access_token"]); // get access token 
+      authToken = response.data.access_token;
       setIsSubmitted(true)
       setAttemptsCount(attemptsCount + 1)
-      setAuthToken(auth_token);
+      setAuthToken(authToken);
     })
     .catch(function (error) {
       console.log(error);
-      return;
     });
 
     if (validationError) return
@@ -145,14 +145,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 const $screenContentContainer: ViewStyle = {
   paddingVertical: spacing.xxl,
   paddingHorizontal: spacing.lg,
-}
-
-const $signIn: TextStyle = {
-  marginBottom: spacing.sm,
-}
-
-const $enterDetails: TextStyle = {
-  marginBottom: spacing.lg,
 }
 
 const $hint: TextStyle = {
