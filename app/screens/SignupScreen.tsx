@@ -32,9 +32,11 @@ export const SignupScreen = (_props) => {
     .then(function (response) {
       if(response.data === false)
         console.log("이미 있는 유저");
-      else
-       console.log("등록완.") // 콘솔 처리 돼 있는 부분은 프론트에서 잘 수정해서 사용자한테 띄워주시면 됩니다. 
+      else{
+        console.log("등록완.") // 콘솔 처리 돼 있는 부분은 프론트에서 수정해서 사용자한테 띄워주시면 됩니다. 
+
         navigation.navigate("Login");
+      }
     })
     .catch(function (error) {
       console.log(error);
