@@ -25,13 +25,16 @@ export const SignupScreen = (_props) => {
     // console.log(userEmail);
     // console.log(userPassword);
 
-    axios.post('http://127.0.0.1:8000/register', {
+    axios.post('http://127.0.0.1:8000/signup', {
       email: userEmail,
       password: userPassword
     })
     .then(function (response) {
-      console.log(response.data);
-      navigation.navigate("Login");
+      if(response.data === false)
+        console.log("이미 있는 유저");
+      else
+       console.log("등록완.") // 콘솔 처리 돼 있는 부분은 프론트에서 잘 수정해서 사용자한테 띄워주시면 됩니다. 
+        navigation.navigate("Login");
     })
     .catch(function (error) {
       console.log(error);
