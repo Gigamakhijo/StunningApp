@@ -1,10 +1,9 @@
 import { observer } from "mobx-react-lite"
 import React, { FC } from "react"
-import { Image, ImageStyle, TextStyle, View, ViewStyle } from "react-native"
+import { View, ViewStyle } from "react-native"
 import {
   Button // @demo remove-current-line
 } from "../components"
-import { isRTL } from "../i18n"
 import { useStores } from "../models" // @demo remove-current-line
 import { AppStackScreenProps } from "../navigators" // @demo remove-current-line
 import { colors, spacing } from "../theme"
@@ -17,13 +16,13 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   _props, // @demo remove-current-line
 ) {
   // @demo remove-block-start
-  const { navigation } = _props
+  // const { navigation } = _props
   const {
     authenticationStore: { logout },
   } = useStores()
 
   function goNext() {
-    //navigation.navigate("")        수정 필 
+  //   navigation.navigate("")      
   }
 
   useHeader(
