@@ -2,12 +2,14 @@
 import { TextField } from 'app/components';
 import { spacing } from 'app/theme';
 import { Button,Text} from "../components" // 여기 주의하세용.. 리액트에서 가져오는게 아니라 컴포넌트에 있는 버튼입니다.
-import { View,ViewStyle,StyleSheet,Image, ImageBackground} from 'react-native';
+import { View,ViewStyle, Image, ImageBackground} from 'react-native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
 const Profile = require("../../assets/images/app-basic-profile.png")
 const BackGround = require("../../assets/images/app-background.png")
+const ProfileLock = require("../../assets/icons/app-lock-Icon.png")
+const ProfilePerson = require("../../assets/icons/app-person-icon.png")
 
 export const SignupScreen = (_props) => {
   const [userEmail, setUserEmail] = useState("")
@@ -37,7 +39,6 @@ export const SignupScreen = (_props) => {
         alert('이미 등록된 유저입니다.')
       else{
         console.log("등록완.") // 콘솔 처리 돼 있는 부분은 프론트에서 수정해서 사용자한테 띄워주시면 됩니다. 
-
         navigation.navigate("Login");
       }
     })
@@ -50,77 +51,91 @@ export const SignupScreen = (_props) => {
   }
     
   return (
-      <ImageBackground source={BackGround} style = {styles.backgroundimage}>
-        <View style={$screenContentContainer}>
-         <Text preset = "bold" size = 'xxl' style = {styles.text}>
-          {"STUNNING"}
-        </Text>
-        <View>
-          <View style = {$profileimage}>
-            <Image source={Profile} style = {styles.image}/>
-          </View>
+      <ImageBackground source={BackGround} style = {$backgroundImage}>
+        <View style = {$profileBox}>
+          <View style={$screenContentContainer}>
+            <Text preset = "bold" size = 'xl' style = {$logoText}>
+              {"STUNNING"}
+            </Text>
+            <View>
+              <View style = {$profileImage}>
+                <Image source={Profile} />
+              </View>
+            </View>
+            <View>
+            <View style = {$textFieldBox}>
+              <View style = {$personIcon}>
+            <Image source={ProfilePerson} />
+            </View>
+            <TextField 
+              value={userEmail}
+              onChangeText={setUserEmail}
+              placeholder="이메일을 입력하세요." // text 입력 전 기본 문구
+              inputWrapperStyle={$emailTextField}
+              autoCapitalize="none" 
+              placeholderTextColor={"#8C8C8C"}
+            />
+            </View>
+            <View style = {$textFieldBox}>
+            <View style = {$lockIcon}>
+            <Image source={ProfileLock}/>
+            </View>
+            <TextField 
+              value={userPassword}
+              onChangeText={setUserPassword}
+              placeholder="8자 이상 입력하세요."
+              inputWrapperStyle={$passwordTextField}
+              autoCapitalize="none"
+              placeholderTextColor={"#8C8C8C"}
+            />
+            </View>
+            </View>
+              <View  style = {$fixToText} >
+                <Button
+                  testID="Back-Button"
+                  text ="취소"
+                  style={$tapButtonBack}
+                  preset="reversed"
+                  onPress={returnLogin}
+                />
+                <Button
+                testID="SignUp-button"
+                text = "완료"
+                style={$tapButtonSignup}
+                preset= "reversed"
+                onPress={registerUser}
+                 />
+              </View>
+          </View> 
         </View>
-        <View>
-          <Text>
-            {'email'}
-          </Text>
-          <TextField 
-            value={userEmail}
-            onChangeText={setUserEmail}
-            placeholder="이메일을 입력하세요." // text 입력 전 기본 문구
-            containerStyle={$textField}
-            autoCapitalize="none" 
-          />
-          <Text>
-            {'password'}
-           </Text>
-         <TextField 
-          value={userPassword}
-          onChangeText={setUserPassword}
-          placeholder="8자 이상 입력하세요."
-          containerStyle={$textField}
-          autoCapitalize="none"
-         />
-        </View>
-        <View  style = {styles.fixToText} >
-          <Button
-            testID="Back-Button"
-            text ="취소"
-            style={$tapButtonBack}
-            preset="reversed"
-            onPress={returnLogin}
-          />
-          <Button
-           testID="SignUp-button"
-           text = "완료"
-           style={$tapButtonSignup}
-           preset= "reversed"
-           onPress={registerUser}
-          />
-        </View>
-      </View> 
-      </ImageBackground>
-    );
-  };
-const styles = StyleSheet.create({
-    backgroundimage: {
+    </ImageBackground>
+  );
+};
+
+const $backgroundImage : ViewStyle = {
       backgroundColor:"#F6E4E4",
-      height: '100%',
-      width: '100%',
-    },
-    fixToText: {
+}
+const $fixToText : ViewStyle =  {
       flexDirection: 'row',
       justifyContent: 'space-between',
-    },
-    image: {
-      height: 90,
-      width: 90,
-    },
-    text: {
-      marginTop: 50,
-    }
-  },
-);
+      marginVertical: '75%'
+}
+const $profileBox:  ViewStyle = {
+      backgroundColor: '#FFFFFF',
+      borderRadius: 53,
+      height:'100%',
+      marginTop: 77,
+      
+}
+
+const $textFieldBox: ViewStyle = {
+      justifyContent: 'space-between',
+      flexDirection: 'row',
+}
+
+const $logoText: ViewStyle = {
+      marginTop: 56,
+}
   
 const $screenContentContainer: ViewStyle = {
      paddingVertical: spacing.xl,
@@ -128,29 +143,50 @@ const $screenContentContainer: ViewStyle = {
      justifyContent: "center",
     
 }
-const $profileimage: ViewStyle = {
+const $profileImage: ViewStyle =  {
   marginTop: '40%',
-  marginBottom: '10%',
+  marginBottom: 31,
   alignItems: 'center',
 }
-
-const $textField: ViewStyle = {
-  marginTop: 5,
-  marginBottom: 5,
+const $personIcon: ViewStyle =  {
+  marginTop: 10,
+  alignItems: 'center',
+  marginRight: 19,
+  marginLeft: 4,
+  width:16,
+  height:2,
+}
+const $lockIcon: ViewStyle =  {
+  marginTop: 18,
+  alignItems: 'center',
+  marginRight: 15,
+  height:24,
+  width:24,
 }
 
+const $emailTextField: ViewStyle = {
+  borderRadius: 15,
+  backgroundColor: "#FFFFFF",
+  width: 290
+}
+const $passwordTextField: ViewStyle = {
+  marginTop: 10,
+  borderRadius: 15,
+  backgroundColor: "#FFFFFF",
+  borderColor: "000",
+  width: 290
+}
 const $tapButtonSignup: ViewStyle = {
   borderRadius: 10,
-  backgroundColor: "#1DB43E",
-  width: "40%",
-  top: '410%',
+  backgroundColor: "#1DB43ECC",
+  width: 140,
+  height: 50,
 }
 const $tapButtonBack: ViewStyle = {
-  // marginTop: spacing.md,
   borderRadius: 10,
-  backgroundColor: "#D63D3D",
-  width: '40%',
-  top: '410%',
+  backgroundColor: "#D63D3DCC",
+  width: 140,
+  height: 50,
 }
 
 
