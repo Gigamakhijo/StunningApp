@@ -173,7 +173,7 @@ const $passwordTextField: ViewStyle = {
   marginTop: 10,
   borderRadius: 15,
   backgroundColor: "#FFFFFF",
-  borderColor: "000",
+
   width: 290
 }
 const $tapButtonSignup: ViewStyle = {
