@@ -2,7 +2,7 @@
 import { TextField } from 'app/components';
 import { spacing } from 'app/theme';
 import { Button,Text} from "../components" // 여기 주의하세용.. 리액트에서 가져오는게 아니라 컴포넌트에 있는 버튼입니다.
-import { View,ViewStyle, Image, ImageBackground} from 'react-native';
+import { View,ViewStyle, Image, ImageBackground, Alert} from 'react-native';
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 
@@ -30,13 +30,13 @@ export const SignupScreen = (_props) => {
     // console.log(userEmail);
     // console.log(userPassword);
 
-    axios.post('http://127.0.0.1:8000/signup', {
+    axios.post('http://127.0.0.1:8080/signup', {
       email: userEmail,
       password: userPassword
     })
     .then(function (response) {
       if(response.data === false)
-        alert('이미 등록된 유저입니다.')
+        Alert.alert('이미 등록된 유저입니다.')
       else{
         console.log("등록완.") // 콘솔 처리 돼 있는 부분은 프론트에서 수정해서 사용자한테 띄워주시면 됩니다. 
         navigation.navigate("Login");
@@ -64,7 +64,7 @@ export const SignupScreen = (_props) => {
             </View>
             <View>
             <View style = {$textFieldBox}>
-              <View style = {$personIcon}>
+            <View style = {$personIcon}>
             <Image source={ProfilePerson} />
             </View>
             <TextField 
@@ -90,20 +90,16 @@ export const SignupScreen = (_props) => {
             />
             </View>
             </View>
-              <View  style = {$fixToText} >
+              <View  style = {$buttonField} >
                 <Button
-                  testID="Back-Button"
                   text ="취소"
                   style={$tapButtonBack}
-                  preset="reversed"
                   onPress={returnLogin}
                 />
                 <Button
-                testID="SignUp-button"
-                text = "완료"
-                style={$tapButtonSignup}
-                preset= "reversed"
-                onPress={registerUser}
+                  text = "완료"
+                  style={$tapButtonSignup} 
+                  onPress={registerUser}
                  />
               </View>
           </View> 
@@ -115,17 +111,17 @@ export const SignupScreen = (_props) => {
 const $backgroundImage : ViewStyle = {
       backgroundColor:"#F6E4E4",
 }
-const $fixToText : ViewStyle =  {
+const $buttonField : ViewStyle =  {
       flexDirection: 'row',
       justifyContent: 'space-between',
-      marginVertical: '75%'
+      paddingVertical: "70%",
 }
+
 const $profileBox:  ViewStyle = {
       backgroundColor: '#FFFFFF',
       borderRadius: 53,
       height:'100%',
-      marginTop: 77,
-      
+      marginTop: 77,   
 }
 
 const $textFieldBox: ViewStyle = {
@@ -134,20 +130,21 @@ const $textFieldBox: ViewStyle = {
 }
 
 const $logoText: ViewStyle = {
-      marginTop: 56,
+      marginTop: 20,
 }
   
 const $screenContentContainer: ViewStyle = {
      paddingVertical: spacing.xl,
      paddingHorizontal: spacing.xl,
-     justifyContent: "center",
-    
+     justifyContent: "center",    
 }
+
 const $profileImage: ViewStyle =  {
-  marginTop: '40%',
-  marginBottom: 31,
+  marginTop: '45%',
+  marginBottom: 35,
   alignItems: 'center',
 }
+
 const $personIcon: ViewStyle =  {
   marginTop: 10,
   alignItems: 'center',
@@ -173,20 +170,21 @@ const $passwordTextField: ViewStyle = {
   marginTop: 10,
   borderRadius: 15,
   backgroundColor: "#FFFFFF",
-
   width: 290
 }
 const $tapButtonSignup: ViewStyle = {
   borderRadius: 10,
-  backgroundColor: "#1DB43ECC",
+  backgroundColor: "#E7E6E6",
   width: 140,
-  height: 50,
+  height: 56,
+  borderColor: "#E7E6E6",
 }
 const $tapButtonBack: ViewStyle = {
   borderRadius: 10,
-  backgroundColor: "#D63D3DCC",
+  backgroundColor: "#F3DDDD",
   width: 140,
-  height: 50,
+  height: 56,
+  borderColor: "#F3DDDD",
 }
 
 
