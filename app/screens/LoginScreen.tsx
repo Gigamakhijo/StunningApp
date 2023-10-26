@@ -25,9 +25,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
-    setAuthEmail("leewoorim@naver.com")
-    setAuthPassword("leewoorim")
-
     // Return a "cleanup" function that React will run when the component unmounts
     return () => {
       setAuthPassword("")
@@ -41,7 +38,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     let authToken = " ";
 
-    axios.post('http://127.0.0.1:8000/auth/token', {
+    axios.post('http://127.0.0.1:8080/auth/token', {
       email: authEmail,
       password: authPassword
     })
@@ -49,7 +46,6 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       console.log(response.data);
       // console.log(response.data["access_token"]); // get access token 
       authToken = response.data.access_token;
-      setIsSubmitted(true)
       setAttemptsCount(attemptsCount + 1)
       setAuthToken(authToken);
     })
@@ -159,5 +155,3 @@ const $textField: ViewStyle = {
 const $tapButton: ViewStyle = {
   marginTop: spacing.xs,
 }
-
-// @demo remove-file
