@@ -6,7 +6,7 @@ commit message 앞에 fix, refactor, add, remove 와 같은 명령형을 사용
 
 commit message는 다음의 문장 뒤에 이어져야 한다:
 
-> "If applied, this codw will...' 
+> "If applied, this code will...' 
 
 또한 다른 개발자에게 어떤것을 하는지 알려주어야 한다, 예를 들어:
 
