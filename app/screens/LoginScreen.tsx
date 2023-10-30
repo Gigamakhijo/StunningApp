@@ -25,6 +25,9 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
+    setAuthEmail("ignite@infinte.red");
+    setAuthPassword("igniteIsAwes0m3")
+
     // Return a "cleanup" function that React will run when the component unmounts
     return () => {
       setAuthPassword("")
@@ -35,31 +38,14 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const error = isSubmitted ? validationError : ""
 
   function login() {
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    let authToken = " ";
-
-    axios.post('http://127.0.0.1:8080/auth/token', {
-      email: authEmail,
-      password: authPassword
-    })
-    .then(function (response) {
-      console.log(response.data);
-      // console.log(response.data["access_token"]); // get access token 
-      authToken = response.data.access_token;
-      setAttemptsCount(attemptsCount + 1)
-      setAuthToken(authToken);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
-
-    if (validationError) return
-
     // Make a request to your server to get an authentication token.
     // If successful, reset the fields and set the token.
     setIsSubmitted(true)
+    setAttemptsCount(attemptsCount +1)
     setAuthPassword("")
     setAuthEmail("")
+
+    setAuthToken(String(Date.now()))
     // We'll mock this with a fake token.
   }
 
