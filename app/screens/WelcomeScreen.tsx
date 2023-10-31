@@ -2,7 +2,7 @@ import { observer } from "mobx-react-lite"
 import React, { FC } from "react"
 import { View, ViewStyle } from "react-native"
 import {
-  Button // @demo remove-current-line
+  Button, // @demo remove-current-line
 } from "../components"
 import { useStores } from "../models" // @demo remove-current-line
 import { AppStackScreenProps } from "../navigators" // @demo remove-current-line
@@ -22,7 +22,7 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
   } = useStores()
 
   function goNext() {
-  //   navigation.navigate("")      
+    //   navigation.navigate("")
   }
 
   useHeader(
@@ -38,11 +38,9 @@ export const WelcomeScreen: FC<WelcomeScreenProps> = observer(function WelcomeSc
 
   return (
     <View style={$container}>
-      <View style={$topContainer}>
-      </View>
+      <View style={$topContainer}></View>
 
       <View style={[$bottomContainer, $bottomContainerInsets]}>
-      
         {/* @demo remove-block-start */}
         <Button
           testID="next-screen-button"

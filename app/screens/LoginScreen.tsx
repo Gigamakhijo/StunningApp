@@ -24,7 +24,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
-    setAuthEmail("");
+    setAuthEmail("")
     setAuthPassword("")
 
     // Return a "cleanup" function that React will run when the component unmounts
@@ -40,7 +40,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
     // Make a request to your server to get an authentication token.
     // If successful, reset the fields and set the token.
     setIsSubmitted(true)
-    setAttemptsCount(attemptsCount +1)
+    setAttemptsCount(attemptsCount + 1)
     setAuthPassword("")
     setAuthEmail("")
 
@@ -64,23 +64,22 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       },
     [isAuthPasswordHidden],
   )
-  
+
   function goSignup() {
-    navigation.navigate("Signup");
+    navigation.navigate("Signup")
   }
 
   return (
     // <ImageBackground source={BackGround} style = {$backgroundImage}></ImageBackground>
     <Screen
       preset="auto"
-  
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
       backgroundColor="#FFFEFE"
     >
       {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
 
-      <ImageBackground source={BackGround} style = {$backgroundImage}></ImageBackground>
+      <ImageBackground source={BackGround} style={$backgroundImage}></ImageBackground>
 
       <TextField
         value={authEmail}
@@ -115,19 +114,16 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       <Button
         testID="signin-button"
         style={$signInButton}
-        text ="회원가입 하기"
+        text="회원가입 하기"
         textStyle={$signInText}
-        
         preset="reversed"
-        
         onPress={goSignup}
         pressedTextStyle={$signInText}
         pressedStyle={$signInButton}
-        
       />
 
       <Button
-        testID="login-button"  
+        testID="login-button"
         style={$loginButton}
         text="로그인"
         textStyle={$loginText}
@@ -136,9 +132,7 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         pressedTextStyle={$pressedloginText}
         pressedStyle={$pressedloginButton}
       />
-
     </Screen>
-
   )
 })
 
@@ -152,7 +146,6 @@ const $hint: TextStyle = {
   marginBottom: spacing.md,
 }
 
-
 const $emailtextField: ViewStyle = {
   width: 300,
   height: 45,
@@ -165,8 +158,8 @@ const $emailtextField: ViewStyle = {
 const $passwordtextField: ViewStyle = {
   width: 300,
   height: 45,
-  marginBottom:10,
-  marginLeft:20,
+  marginBottom: 10,
+  marginLeft: 20,
   backgroundColor: "#FFFFFF",
 }
 
@@ -192,19 +185,17 @@ const $loginButton: ViewStyle = {
   width: 300,
   height: 40,
   backgroundColor: "#E1E1E1",
-  
 }
 
 const $signInButton: ViewStyle = {
   marginBottom: 5,
-  marginLeft:210,
+  marginLeft: 210,
   flexDirection: "column",
   borderRadius: 10,
   width: 115,
   minHeight: 1,
   paddingVertical: 2,
   backgroundColor: "#FFFEFE",
-  
 }
 
 const $loginText: TextStyle = {
@@ -219,8 +210,8 @@ const $pressedloginText: TextStyle = {
   color: "#FFFFFF",
 }
 
-const $backgroundImage : ViewStyle = {
-      backgroundColor:"#F6E4E4",
+const $backgroundImage: ViewStyle = {
+  backgroundColor: "#F6E4E4",
 }
 
 // @demo remove-file
