@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import React, { FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle } from "react-native"
+import { TextInput, TextStyle, ViewStyle, ImageBackground } from "react-native"
 import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
@@ -11,7 +11,7 @@ interface LoginScreenProps extends AppStackScreenProps<"Login"> {}
 
 export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_props) {
   const authPasswordInput = useRef<TextInput>()
-
+  const { navigation } = _props
   const [authPassword, setAuthPassword] = useState("")
   const [isAuthPasswordHidden, setIsAuthPasswordHidden] = useState(true)
   const [isSubmitted, setIsSubmitted] = useState(false)
@@ -19,11 +19,12 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
   const {
     authenticationStore: { authEmail, setAuthEmail, setAuthToken, validationError },
   } = useStores()
+  const BackGround = require("../../assets/images/app-background.png")
 
   useEffect(() => {
     // Here is where you could fetch credentials from keychain or storage
     // and pre-fill the form fields.
-    setAuthEmail("")
+    setAuthEmail("");
     setAuthPassword("")
 
     // Return a "cleanup" function that React will run when the component unmounts
@@ -35,23 +36,18 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
   const error = isSubmitted ? validationError : ""
 
-
   function login() {
-
-    
     // Make a request to your server to get an authentication token.
     // If successful, reset the fields and set the token.
     setIsSubmitted(true)
-    setAttemptsCount(attemptsCount + 1)
+    setAttemptsCount(attemptsCount +1)
     setAuthPassword("")
     setAuthEmail("")
 
     setAuthToken(String(Date.now()))
-    //navigation.navigate()
     // We'll mock this with a fake token.
   }
-
-  
+  // const BackGround = require("../../assets/images/app-background.png")
 
   const PasswordRightAccessory = useMemo(
     () =>
@@ -68,17 +64,24 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
       },
     [isAuthPasswordHidden],
   )
+  
+  function goSignup() {
+    navigation.navigate("Signup");
+  }
 
   return (
+    // <ImageBackground source={BackGround} style = {$backgroundImage}></ImageBackground>
     <Screen
       preset="auto"
+  
       contentContainerStyle={$screenContentContainer}
       safeAreaEdges={["top", "bottom"]}
       backgroundColor="#FFFEFE"
     >
       {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
 
-      
+      <ImageBackground source={BackGround} style = {$backgroundImage}></ImageBackground>
+
       <TextField
         value={authEmail}
         onChangeText={setAuthEmail}
@@ -111,28 +114,31 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
       <Button
         testID="signin-button"
-        text="회원가입 하기"
-        textStyle={$signInText}
         style={$signInButton}
+        text ="회원가입 하기"
+        textStyle={$signInText}
+        
         preset="reversed"
         
-        //onPress={() => }
+        onPress={goSignup}
         pressedTextStyle={$signInText}
         pressedStyle={$signInButton}
-      />
-      <Button
-        testID="login-button"
         
+      />
+
+      <Button
+        testID="login-button"  
+        style={$loginButton}
         text="로그인"
         textStyle={$loginText}
-        style={$loginButton}
         preset="reversed"
-        //onPress={login}
+        onPress={login}
         pressedTextStyle={$pressedloginText}
         pressedStyle={$pressedloginButton}
       />
 
     </Screen>
+
   )
 })
 
@@ -190,12 +196,13 @@ const $loginButton: ViewStyle = {
 }
 
 const $signInButton: ViewStyle = {
-  marginBottom:0.1,
+  marginBottom: 5,
   marginLeft:210,
   flexDirection: "column",
   borderRadius: 10,
-  width: 130,
-  height: 5,
+  width: 115,
+  minHeight: 1,
+  paddingVertical: 2,
   backgroundColor: "#FFFEFE",
   
 }
@@ -211,4 +218,9 @@ const $signInText: TextStyle = {
 const $pressedloginText: TextStyle = {
   color: "#FFFFFF",
 }
+
+const $backgroundImage : ViewStyle = {
+      backgroundColor:"#F6E4E4",
+}
+
 // @demo remove-file
