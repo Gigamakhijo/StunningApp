@@ -28,9 +28,10 @@ import { colors } from "app/theme"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined
-  // 🔥 Your screens go here
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
+  Login: undefined
+  SetProfile: undefined
+  SignUp: undefined
+  Main: undefined
 }
 
 /**
@@ -49,10 +50,14 @@ const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
   return (
-    <Stack.Navigator screenOptions={{ headerShown: false, navigationBarColor: colors.background }}>
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-      {/** 🔥 Your screens go here */}
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+    <Stack.Navigator
+      screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
+      initialRouteName="Login"
+    >
+      <Stack.Screen name="Login" component={Screens.LoginScreen} />
+      <Stack.Screen name="SignUp" component={Screens.SignupScreen} />
+      <Stack.Screen name="SetProfile" component={Screens.SetProfileScreen} />
+      <Stack.Screen name="Main" component={Screens.MainScreen} />
     </Stack.Navigator>
   )
 })
