@@ -4,21 +4,13 @@
  * Generally speaking, it will contain an auth flow (registration, login, forgot password)
  * and a "main" flow which the user will use once logged in.
  */
-import {
-  DarkTheme,
-  DefaultTheme,
-  NavigationContainer,
-  NavigatorScreenParams, // @demo remove-current-line
-} from "@react-navigation/native"
+import { DarkTheme, DefaultTheme, NavigationContainer } from "@react-navigation/native"
 import { createNativeStackNavigator, NativeStackScreenProps } from "@react-navigation/native-stack"
 import { observer } from "mobx-react-lite"
 import React from "react"
 import { useColorScheme } from "react-native"
 import * as Screens from "app/screens"
 import Config from "../config"
-import { useStores } from "../models" // @demo remove-current-line
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { DemoNavigator, DemoTabParamList } from "./DemoNavigator" // @demo remove-current-line
 import { navigationRef, useBackButtonHandler } from "./navigationUtilities"
 import { colors } from "app/theme"
 
@@ -36,14 +28,10 @@ import { colors } from "app/theme"
  *   https://reactnavigation.org/docs/typescript/#organizing-types
  */
 export type AppStackParamList = {
-  Welcome: undefined
-  Login: undefined // @demo remove-current-line
-  Demo: NavigatorScreenParams<DemoTabParamList> // @demo remove-current-line
-  // 🔥 Your screens go here
+  Login: undefined
   SetProfile: undefined
-  Signup: undefined
+  SignUp: undefined
   Main: undefined
-  // IGNITE_GENERATOR_ANCHOR_APP_STACK_PARAM_LIST
 }
 
 /**
@@ -61,35 +49,15 @@ export type AppStackScreenProps<T extends keyof AppStackParamList> = NativeStack
 const Stack = createNativeStackNavigator<AppStackParamList>()
 
 const AppStack = observer(function AppStack() {
-  // @demo remove-block-start
-  const {
-    authenticationStore: { isAuthenticated },
-  } = useStores()
-
-  // @demo remove-block-end
   return (
     <Stack.Navigator
       screenOptions={{ headerShown: false, navigationBarColor: colors.background }}
-      initialRouteName={isAuthenticated ? "SetProfile" : "Login"} // @demo remove-current-line
+      initialRouteName="Login"
     >
-      {/* @demo remove-block-start */}
-      {isAuthenticated ? (
-        <>
-          {/* @demo remove-block-end */}
-          <Stack.Screen name="SetProfile" component={Screens.SetProfileScreen} />
-          {/* @demo remove-block-start */}
-          <Stack.Screen name="Main" component={Screens.MainScreen} />
-        </>
-      ) : (
-        <>
-          <Stack.Screen name="Login" component={Screens.LoginScreen} />
-        </>
-      )}
-      {/* @demo remove-block-end */}
-      {/** 🔥 Your screens go here */}
-      <Stack.Screen name="Welcome" component={Screens.WelcomeScreen} />
-      <Stack.Screen name="Signup" component={Screens.SignupScreen} />
-      {/* IGNITE_GENERATOR_ANCHOR_APP_STACK_SCREENS */}
+      <Stack.Screen name="Login" component={Screens.LoginScreen} />
+      <Stack.Screen name="SignUp" component={Screens.SignupScreen} />
+      <Stack.Screen name="SetProfile" component={Screens.SetProfileScreen} />
+      <Stack.Screen name="Main" component={Screens.MainScreen} />
     </Stack.Navigator>
   )
 })

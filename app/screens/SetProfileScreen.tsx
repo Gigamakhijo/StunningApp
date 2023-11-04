@@ -1,30 +1,22 @@
-/* eslint-disable react-native/no-color-literals */
-/* eslint-disable react-native/no-inline-styles */
+import { observer } from "mobx-react-lite"
 import { ImageBackground, View, ViewStyle, Image, TextStyle, Pressable } from "react-native"
-import React, { useEffect, useState } from "react"
+import React, { FC, useState } from "react"
 import { Button, TextField, Text } from "app/components"
-import { useStores } from "app/models"
+import { AppStackScreenProps } from "../navigators"
 import { spacing } from "app/theme"
 
-export const SetProfileScreen = (_props) => {
-  const [userId, setUserId] = useState("")
+interface SetProfileScreenProps extends AppStackScreenProps<"SetProfile"> {}
+
+export const SetProfileScreen: FC<SetProfileScreenProps> = observer(function SetProfileScreen(
+  _props,
+) {
   const { navigation } = _props
 
   const BackGround = require("../../assets/images/app-background.png")
   const Profile = require("../../assets/images/app-basic-profile.png")
   const AppBar = require("../../assets/icons/app-bar.png")
 
-  useEffect(() => {
-    return () => {
-      setUserId("")
-    }
-  }, [])
-
-  const {
-    authenticationStore: { logout },
-  } = useStores()
-
-  function goHome() {
+  function continueToMain() {
     navigation.navigate("Main")
   }
   const [isSelect, setSelect] = useState([false, false])
@@ -73,8 +65,6 @@ export const SetProfileScreen = (_props) => {
               </View>
               <TextField
                 inputWrapperStyle={$textField}
-                value={userId}
-                onChangeText={setUserId}
                 placeholder="아이디를 입력하세요 " // text 입력 전 기본 문자
                 autoCapitalize="none"
                 placeholderTextColor={"#8C8C8C"}
@@ -115,14 +105,14 @@ export const SetProfileScreen = (_props) => {
           </View>
           {/* textfield view end */}
           <View style={$buttonAlign}>
-            <Button text="취소" style={$tapButtonBack} onPress={logout} />
-            <Button text="완료" style={$tapButtonSignup} onPress={goHome} />
+            <Button text="취소" style={$tapButtonBack} onPress={navigation.goBack} />
+            <Button text="완료" style={$tapButtonSignup} onPress={continueToMain} />
           </View>
         </View>
       </View>
     </ImageBackground>
   )
-}
+})
 
 const $appBar: ViewStyle = {
   alignItems: "center",

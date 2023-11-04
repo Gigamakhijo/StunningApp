@@ -1,32 +1,29 @@
-/* eslint-disable react/react-in-jsx-scope */
-import { Image, ImageBackground, View, ViewStyle } from "react-native"
+import React from "react"
+import { ImageBackground, View, ViewStyle } from "react-native"
+import { Screen, Icon } from "../components"
 import { CalendarView } from "../components/CalendarView"
+
 export const MainScreen = (_props) => {
-  const BackGround = require("../../assets/images/app-background.png")
-  const WeeklyReport = require("../../assets/images/WeeklyChart_Line.png")
+  const image = require("../../assets/images/app-background.png")
 
   return (
-    <ImageBackground source={BackGround} style={$backgroundImage}>
-      <View style={$profileBox}>
-        <Image source={WeeklyReport} style={$weeklyreportImage} />
-        <CalendarView />
+    <Screen preset="scroll">
+      <View style={$container}>
+        <ImageBackground source={image} style={$backgroundImage}>
+          <Icon icon="stats" style={$iconStyle} />
+          <CalendarView />
+        </ImageBackground>
       </View>
-    </ImageBackground>
+    </Screen>
   )
 }
 
-const $backgroundImage: ViewStyle = {
-  backgroundColor: "#F6E4E4",
+const $container: ViewStyle = {
+  backgroundColor: "$FFFEFE",
 }
 
-const $profileBox: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-  borderRadius: 53,
-  height: "100%",
-  marginTop: 77,
-}
-const $weeklyreportImage: ViewStyle = {
-  flexDirection: "row",
-  marginLeft: 335,
-  marginBottom: 10,
+const $iconStyle: ViewStyle = {}
+
+const $backgroundImage: ViewStyle = {
+  backgroundColor: "#F6E4E4",
 }
