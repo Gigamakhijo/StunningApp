@@ -1,33 +1,33 @@
-/* eslint-disable react/react-in-jsx-scope */
-// import React ,{useState, Component} from 'react';
-import { ImageBackground,Image, View, ViewStyle } from "react-native";
-import { Screen} from "../components";
-import { CalendarView} from "../components/CalendarView";
-export const MainScreen = (_props) => {
-  const BackGround = require("../../assets/images/app-background.png")
-  const WeeklyReport = require("../../assets/images/WeeklyChart_Line.png")
+import React from "react"
+import { ImageBackground, View, ViewStyle } from "react-native"
+import { Screen, Icon } from "../components"
+import { CalendarView } from "../components/CalendarView"
 
-  return(
-    <Screen
-      preset="auto"
-      contentContainerStyle={$screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
-      backgroundColor="#FFFEFE"
-    >
-      <ImageBackground source={BackGround} style={$backgroundImage}>
-        <View style={$profileBox}>
-          <Image source={WeeklyReport} style={$weeklyreportImage}/>
+export const MainScreen = (_props) => {
+  const image = require("../../assets/images/app-background.png")
+
+  return (
+    <Screen preset="scroll">
+      <View style={$container}>
+        <ImageBackground source={image} style={$backgroundImage}>
+          <Icon icon="stats" style={$iconStyle} />
           <CalendarView />
-          {/* <Text style={$scheduletextstyle}>{new Date().toDateString()+" Schedule"}</Text> */}
-          {/* <View style={$scheduleBox}></View> */}
-        </View>
-      </ImageBackground>
+        </ImageBackground>
+      </View>
     </Screen>
   )
 }
-const $screenContentContainer: ViewStyle ={
-  // alignContent: 'flex-start',
-  flexDirection: 'column',
+
+const $container: ViewStyle = {
+  backgroundColor: "$FFFEFE"
+}
+
+const $iconStyle: ViewStyle = {
+
+}
+
+const $screenContentContainer: ViewStyle = {
+  flexDirection: "column",
 }
 const $backgroundImage: ViewStyle = {
   backgroundColor: "#F6E4E4",
@@ -39,20 +39,8 @@ const $profileBox: ViewStyle = {
   height: "100%",
   marginTop: 77,
 }
-// const $scheduleBox: ViewStyle ={
-  
-//   backgroundColor: "white",
-//   borderRadius: 20,
-//   height: 100,
-//   marginTop: 10,
-//   marginLeft:20,
-//   marginRight:20,
-// }
+
 const $weeklyreportImage: ViewStyle = {
   marginTop: 5,
   marginLeft: 330,
 }
-// const $scheduletextstyle: ViewStyle ={
-//   marginLeft: 30,
-//   marginTop:5,
-// }
