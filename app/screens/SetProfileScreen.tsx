@@ -1,8 +1,8 @@
 /* eslint-disable react-native/no-color-literals */
 /* eslint-disable react-native/no-inline-styles */
-import { ImageBackground, View, ViewStyle, Image, TextStyle, Pressable } from "react-native"
+import { ImageBackground, View, ViewStyle, Image, ImageStyle, TextStyle, Pressable } from "react-native"
 import React, { useEffect, useState } from "react"
-import { Button, TextField, Text } from "app/components"
+import { Button, TextField, Text, Screen } from "app/components"
 import { useStores } from "app/models"
 import { spacing } from "app/theme"
 
@@ -55,74 +55,103 @@ export const SetProfileScreen = (_props) => {
   }
 
   return (
-    <ImageBackground source={BackGround} style={$backgroundImage}>
-      <View style={$profileBox}>
-        <View style={$screenContentContainer}>
-          <View style={$profileImage}>
-            <Image source={Profile} />
-            <Image source={Profile} />
+    <Screen
+      preset="auto"
+    >    
+      <ImageBackground source={BackGround} style={$backgroundImage}>
+        <View style={$profileBox}>
+          <View style={$imageAlign}>
+            <Image source={Profile} style={$image1Align} />
+            <Image source={Profile} style={$image2Align} />
           </View>
-          <View style={$appBar}>
-            <Image source={AppBar} />
+          <Text preset= "bold" style={$textStylePhoto}> {"사진 변경하기"} 
+          </Text>
+          <View style={$HorizonLine}></View>
+          <View style={$profileAlign}>
+            <Text style={$profiletextStyle}>{"아이디"}</Text>
+            <TextField
+                 inputWrapperStyle={$textField}
+                 value={userId}
+                 onChangeText={setUserId}
+                 placeholder="아이디를 입력하세요 " // text 입력 전 기본 문자
+                 autoCapitalize="none"
+                 placeholderTextColor={"#8C8C8C"}
+                 placeholderTxOptions={$placeholdertextStyle}
+            />
           </View>
-          {/* textfield view start */}
-          <View>
-            <View style={$textFieldBox}>
-              <View>
-                <Text preset="bold">{"아이디"}</Text>
-              </View>
-              <TextField
-                inputWrapperStyle={$textField}
-                value={userId}
-                onChangeText={setUserId}
-                placeholder="아이디를 입력하세요 " // text 입력 전 기본 문자
-                autoCapitalize="none"
-                placeholderTextColor={"#8C8C8C"}
-              />
-            </View>
-            <View style={$textFieldBox}>
-              <Text preset="bold">{"성별"}</Text>
-              <View style={$alignGenderButton}>
-                {selectGender(0)}
-                {selectGender2(1)}
-              </View>
-            </View>
-            <View style={$textFieldBox}>
-              <View>
-                <Text preset="bold">{"이메일"}</Text>
-              </View>
-              <TextField
-                inputWrapperStyle={$textField}
-                placeholder="이메일" // text 입력 전 기본 문자
-                autoCapitalize="none"
-                placeholderTextColor={"#8C8C8C"}
-              />
-            </View>
-            <View style={$textFieldBox}>
-              <View>
-                <Text preset="bold">{"전화번호"}</Text>
-              </View>
-              <TextField
-                inputWrapperStyle={$textField}
-                placeholder="전화번호" // text 입력 전 기본 문자
-                autoCapitalize="none"
-                placeholderTextColor={"#8C8C8C"}
-              />
-            </View>
-            <View style={$appBar}>
-              <Image source={AppBar} />
-            </View>
-          </View>
-          {/* textfield view end */}
-          <View style={$buttonAlign}>
-            <Button text="취소" style={$tapButtonBack} onPress={logout} />
-            <Button text="완료" style={$tapButtonSignup} onPress={goHome} />
-          </View>
+
         </View>
-      </View>
-    </ImageBackground>
+      </ImageBackground>
+    </Screen>
+    // <ImageBackground source={BackGround} style={$backgroundImage}>
+    //   <View style={$profileBox}>
+    //     <View style={$screenContentContainer}>
+    //       <View style={$profileImage}>
+    //         <Image source={Profile} />
+    //         <Image source={Profile} />
+    //       </View>
+    //       <View style={$appBar}>
+    //         <Image source={AppBar} />
+    //       </View>
+    //       {/* textfield view start */}
+    //       <View>
+    //         <View style={$textFieldBox}>
+    //           <View>
+    //             <Text preset="bold">{"아이디"}</Text>
+    //           </View>
+    //           <TextField
+    //             inputWrapperStyle={$textField}
+    //             value={userId}
+    //             onChangeText={setUserId}
+    //             placeholder="아이디를 입력하세요 " // text 입력 전 기본 문자
+    //             autoCapitalize="none"
+    //             placeholderTextColor={"#8C8C8C"}
+    //           />
+    //         </View>
+    //         <View style={$textFieldBox}>
+    //           <Text preset="bold">{"성별"}</Text>
+    //           <View style={$alignGenderButton}>
+    //             {selectGender(0)}
+    //             {selectGender2(1)}
+    //           </View>
+    //         </View>
+    //         <View style={$textFieldBox}>
+    //           <View>
+    //             <Text preset="bold">{"이메일"}</Text>
+    //           </View>
+    //           <TextField
+    //             inputWrapperStyle={$textField}
+    //             placeholder="이메일" // text 입력 전 기본 문자
+    //             autoCapitalize="none"
+    //             placeholderTextColor={"#8C8C8C"}
+    //           />
+    //         </View>
+    //         <View style={$textFieldBox}>
+    //           <View>
+    //             <Text preset="bold">{"전화번호"}</Text>
+    //           </View>
+    //           <TextField
+    //             inputWrapperStyle={$textField}
+    //             placeholder="전화번호" // text 입력 전 기본 문자
+    //             autoCapitalize="none"
+    //             placeholderTextColor={"#8C8C8C"}
+    //           />
+    //         </View>
+    //         <View style={$appBar}>
+    //           <Image source={AppBar} />
+    //         </View>
+    //       </View>
+    //       {/* textfield view end */}
+    //       <View style={$buttonAlign}>
+    //         <Button text="취소" style={$tapButtonBack} onPress={logout} />
+    //         <Button text="완료" style={$tapButtonSignup} onPress={goHome} />
+    //       </View>
+    //     </View>
+    //   </View>
+    // </ImageBackground>
   )
 }
+
 
 const $appBar: ViewStyle = {
   alignItems: "center",
@@ -135,29 +164,42 @@ const $alignGenderButton: ViewStyle = {
   marginRight: 90,
 }
 
-const $profileImage: ViewStyle = {
-  marginTop: "15%",
-  marginBottom: "10%",
-  paddingHorizontal: 50,
+
+const $imageAlign: ImageStyle = {
   alignSelf: "auto",
-  justifyContent: "space-between",
-  flexDirection: "row",
+ justifyContent: "space-between",
+ flexDirection: "row",
+ marginTop: 29,
+ marginBottom: 8,
 }
 
-const $screenContentContainer: ViewStyle = {
-  paddingVertical: spacing.xl,
-  paddingHorizontal: spacing.xl,
-  justifyContent: "center",
+const $image1Align: ImageStyle = {
+   marginLeft: 74,
+}
+
+const $image2Align: ImageStyle = {
+  // marginLeft: 63,
+  marginRight: 74,
+}
+
+const $profileAlign: ViewStyle = {
+  flexDirection: "row",
+  alignItems: "baseline",
+  justifyContent: "space-between",
+  marginTop: 25,
 }
 
 const $profileBox: ViewStyle = {
-  backgroundColor: "#FFFFFF",
-  borderRadius: 53,
+  backgroundColor: "#FFFEFE",
+  borderTopLeftRadius: 53,
+  borderTopRightRadius: 53,
   height: "100%",
-  marginTop: 77,
+  marginTop: 75.13,
 }
 
 const $backgroundImage: ViewStyle = {
+  width: '100%',
+  height: '100%',
   backgroundColor: "#F6E4E4",
 }
 
@@ -197,6 +239,22 @@ const $tapButtonGender: ViewStyle = {
   alignItems: "center",
 }
 
+const $profiletextStyle: TextStyle = {
+  fontSize: 15,
+  fontWeight: "bold",
+  marginLeft: 37,
+  marginRight: 10,
+}
+
+const $placeholdertextStyle: TextStyle = {
+  fontSize: 15,
+  fontWeight: "bold",
+}
+const $textStylePhoto: TextStyle ={
+  fontSize: 15,
+  fontWeight: "100",
+  marginLeft: 230,
+}
 const $textStyleGender: TextStyle = {
   fontSize: 15,
   color: "#000",
@@ -212,8 +270,22 @@ const $textFieldBox: ViewStyle = {
 }
 
 const $textField: ViewStyle = {
-  marginLeft: 10,
+  // marginLeft: 10,
+  // justifyContent: "space-around",
+  alignItems: "center",
   backgroundColor: "#FFFFFF",
-  width: 290,
+  width: 220,
+  height: 40,
   borderColor: "#FFFFFF",
+}
+
+
+
+const $HorizonLine: ViewStyle = {
+        backgroundColor: "#ECECEC",
+        height: 3,
+        width: 391,
+        marginTop: 9,
+        // background: "#fff", 
+       //  padding: "0 10px",
 }

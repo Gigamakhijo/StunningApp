@@ -1,6 +1,6 @@
 import { observer } from "mobx-react-lite"
 import React, { FC, useEffect, useMemo, useRef, useState } from "react"
-import { TextInput, TextStyle, ViewStyle, ImageBackground } from "react-native"
+import { View, TextInput, TextStyle, ViewStyle, ImageBackground } from "react-native"
 import { Button, Icon, Screen, Text, TextField, TextFieldAccessoryProps } from "../components"
 import { useStores } from "../models"
 import { AppStackScreenProps } from "../navigators"
@@ -71,17 +71,22 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
 
   return (
     // <ImageBackground source={BackGround} style = {$backgroundImage}></ImageBackground>
+    // <View>
+    //     <ImageBackground source={BackGround} style={$backgroundImage}></ImageBackground>
+    //   </View>
+
     <Screen
       preset="auto"
-      contentContainerStyle={$screenContentContainer}
-      safeAreaEdges={["top", "bottom"]}
-      backgroundColor="#FFFEFE"
+      // contentContainerStyle={$screenContentContainer}
+     // safeAreaEdges={["bottom"]}
+      // backgroundColor="#FFFEFE"
     >
       {attemptsCount > 2 && <Text tx="loginScreen.hint" size="sm" weight="light" style={$hint} />}
 
-      <ImageBackground source={BackGround} style={$backgroundImage}></ImageBackground>
-
-      <TextField
+      
+      <ImageBackground source={BackGround} style={$backgroundImage}>
+        <View style={$screenContentContainer}>
+        <TextField
         value={authEmail}
         onChangeText={setAuthEmail}
         placeholder="이메일을 입력하세요."
@@ -132,13 +137,21 @@ export const LoginScreen: FC<LoginScreenProps> = observer(function LoginScreen(_
         pressedTextStyle={$pressedloginText}
         pressedStyle={$pressedloginButton}
       />
+        </View>
+      </ImageBackground>
+
+      
     </Screen>
   )
 })
 
 const $screenContentContainer: ViewStyle = {
-  paddingVertical: spacing.xxl,
-  paddingHorizontal: spacing.lg,
+   marginTop:75.13,
+   // paddingVertical: spacing.xs,
+   paddingHorizontal: spacing.lg,
+   backgroundColor: "#FFFEFE",
+   borderTopLeftRadius: 53,
+   borderTopRightRadius: 53,
 }
 
 const $hint: TextStyle = {
@@ -149,7 +162,7 @@ const $hint: TextStyle = {
 const $emailtextField: ViewStyle = {
   width: 300,
   height: 45,
-  marginTop: 400,
+  marginTop: 408.87,
   marginBottom: 10,
   marginLeft: 20,
   backgroundColor: "#FFFFFF",
@@ -158,7 +171,7 @@ const $emailtextField: ViewStyle = {
 const $passwordtextField: ViewStyle = {
   width: 300,
   height: 45,
-  marginBottom: 10,
+  marginBottom: 20,
   marginLeft: 20,
   backgroundColor: "#FFFFFF",
 }
@@ -176,7 +189,7 @@ const $pressedloginButton: ViewStyle = {
 }
 
 const $loginButton: ViewStyle = {
-  marginBottom: spacing.xs,
+  marginBottom: 180,
   marginLeft: 20,
   marginRight: 20,
   flexDirection: "column",
@@ -188,7 +201,7 @@ const $loginButton: ViewStyle = {
 }
 
 const $signInButton: ViewStyle = {
-  marginBottom: 5,
+  marginBottom: 20,
   marginLeft: 210,
   flexDirection: "column",
   borderRadius: 10,
@@ -200,17 +213,24 @@ const $signInButton: ViewStyle = {
 
 const $loginText: TextStyle = {
   color: "#000000",
+  fontSize: 15,
+  fontWeight: 'bold',
 }
 
 const $signInText: TextStyle = {
+  fontSize: 15,
   color: "#DD8181",
+  fontWeight: 'normal',
 }
 
 const $pressedloginText: TextStyle = {
   color: "#FFFFFF",
 }
 
+
 const $backgroundImage: ViewStyle = {
+  width: '100%',
+  height: '100%',
   backgroundColor: "#F6E4E4",
 }
 
